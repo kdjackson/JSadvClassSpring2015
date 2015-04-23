@@ -38,60 +38,60 @@ function checkForm(e) {
         isValid = false;
     }
     
-    var inputs = document.querySelectorAll('input');
-    var regexValidations = {
-        
-                "fname" : {
-                    "regex" : /^[A-Z][a-zA-Z]*$/,
-                },
-        
-                "lname" : {
-                    "regex" : /^[A-Z][a-zA-Z]*$/,
-                },
-        
-                "email" : {
-                    "regex" : /^[a-zA-Z0-9$]+[@]{1}[a-zA-Z]+[\.]{1}[a-zA-Z]{2,3}$/,
-                },        
-    
-                "phone" : {
-                    "regex" : /^\(?([2-9]{1}[0-9]{2})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
-                    
-                },
-                
-                "address1" : {
-                    "regex" : 
-                },
-        
-                "address2" : {
-                    "regex" :
-                },
-                
-                "city" : {
-                    "regex" :
-                },
-        
-                "state" : {
-                    "regex" :
-                },
-        
-                "zipcode" : {
-                    "regex" : /^\d{5}(?:[-\s]\d{4})?$/,
-                },
-        
-                "username" : {
-                    "regex" :
-                },
-        
-                "password" : {
-                    "regex" :
-                },
-        
-                "passwordConfirm" : {
-                    "regex" :
-                }
-        
-                        
-    };
+//    var inputs = document.querySelectorAll('input');
+//    var regexValidations = {
+//        
+//                "fname" : {
+//                    "regex" : /^[A-Z][a-zA-Z]*$/,
+//                },
+//        
+//                "lname" : {
+//                    "regex" : /^[A-Z][a-zA-Z]*$/,
+//                },
+//        
+//                "email" : {
+//                    "regex" : /^[a-zA-Z0-9$]+[@]{1}[a-zA-Z]+[\.]{1}[a-zA-Z]{2,3}$/,
+//                },        
+//    
+//                "phone" : {
+//                    "regex" : /^\(?([2-9]{1}[0-9]{2})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
+//                    
+//                },
+//                
+//                "address1" : {
+//                    "regex" : 
+//                },
+//        
+//                "address2" : {
+//                    "regex" :
+//                },
+//                
+//                "city" : {
+//                    "regex" :
+//                },
+//        
+//                "state" : {
+//                    "regex" :
+//                },
+//        
+//                "zipcode" : {
+//                    "regex" : /^\d{5}(?:[-\s]\d{4})?$/,
+//                },
+//        
+//                "username" : {
+//                    "regex" :
+//                },
+//        
+//                "password" : {
+//                    "regex" :
+//                },
+//        
+//                "passwordConfirm" : {
+//                    "regex" :
+//                }
+//        
+//                        
+//    };
 
 
 
