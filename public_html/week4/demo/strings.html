@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div id="test">TODO write content</div>
+        
+        <script type="text/javascript">
+            //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
+            
+            var str = 'hey';
+            console.log(str.toUpperCase());
+            
+            var myStr = 'hello lo';
+            var newStr = myStr.slice(0,3);
+            newStr = newStr + 'loooo';
+            console.log(newStr);
+            
+            console.log(newStr.charAt(2));
+            console.log( newStr.indexOf('lo') );
+            
+            var str = 'car van truck';
+            var strArr = str.split(' ');
+            
+            //strArr.join('</li><li>');
+            
+            var div = document.getElementById('test');            
+            div.innerHTML = '<ul><li>' + strArr.join('</li><li>') + '</li></ul>'
+            
+            
+            //console.log( str.split(' ') );
+            
+            
+        </script>
+    </body>
+</html>
