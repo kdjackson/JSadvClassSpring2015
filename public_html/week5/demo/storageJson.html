@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <script type="text/javascript">
+            
+            var json = {
+                "fname" : 'gabe',
+                "lname" : 'forti',
+                "nickname" : 'mr.g'
+            };
+        
+            localStorage.setItem('json', JSON.stringify(json) );
+            var savedData = localStorage.getItem('json');
+            
+            console.log(savedData);
+            console.log(JSON.parse(savedData));
+            
+            document.querySelector('div').innerHTML = "";
+            
+            for (var key in json) {
+                console.log(key + ": " + json[key]);
+                document.querySelector('div').innerHTML += key + ": " + json[key] + "</br>";                 
+            }
+            
+            
+            
+
+            
+        
+        </script>
+    </body>
+</html>
