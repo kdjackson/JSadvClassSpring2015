@@ -3,34 +3,50 @@ var form = document.querySelector('form');
 var geocoder;
 
 
-
 form.addEventListener('submit', checkForm);
 
 function checkForm(e) {
     e.preventDefault(); //form will not submit
+    
+    var regexValidations = {        
+                "fname" : /^[A-Z][a-zA-Z]*$/,                        
+                "lname" : /^[A-Z][a-zA-Z]*$/,                
+                "email" :/^[a-zA-Z0-9$]+[@]{1}[a-zA-Z]+[\.]{1}[a-zA-Z]{2,3}$/,                 
+                "phone" : /^\(?([2-9]{1}[0-9]{2})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,                    
+                "address1" : /^\d{1,6}\040([A-Z]{1}[a-z]{1,}\040[A-Z]{1}[a-z]{1,})$|^\d{1,6}\040([A-Z]{1}[a-z]{1,}\040[A-Z]{1}[a-z]{1,}\040[A-Z]{1}[a-z]{1,})$|^\d{1,6}\040([A-Z]{1}[a-z]{1,}\040[A-Z]{1}[a-z]{1,}\040[A-Z]{1}[a-z]{1,}\040[A-Z]{1}[a-z]{1,})$/,                        
+                "address2" : /^\d{1,6}\040([A-Z]{1}[a-z]{1,}\040[A-Z]{1}[a-z]{1,})$|^\d{1,6}\040([A-Z]{1}[a-z]{1,}\040[A-Z]{1}[a-z]{1,}\040[A-Z]{1}[a-z]{1,})$|^\d{1,6}\040([A-Z]{1}[a-z]{1,}\040[A-Z]{1}[a-z]{1,}\040[A-Z]{1}[a-z]{1,}\040[A-Z]{1}[a-z]{1,})$/,                                
+                "city" : /^[a-zA-Z]*$/,                        
+                "state" : /^[a-zA-Z{2}]*$/,                        
+                "zipcode" : /^\d{5}(?:[-\s]\d{4})?$/,                        
+                "username" : /^[a-zA-Z0-9]*$/,                       
+                "password" : /^[a-zA-Z0-9]*$/,
+                "passwordConfirm" : /^[a-zA-Z0-9]*$/                                   
+};
+    
 
     var fields = document.querySelectorAll('form p');
     var isValid = true;
 
     var jsonData = {};
 
-
-
-
     var len = fields.length;
     for (var i = 0; i < len; i++) {
         var input = fields[i].querySelector('input');
         jsonData[input.name] = input.value;
-
-        if (input.value === '') {
+        
+        if (input.name === 'address2' && input.value === '') {
+            fields[i].classList.remove('error');
+            continue;
+        }
+          
+        if (input.value === '' || !regexValidations[input.name].test(input.value) )  {
             fields[i].classList.add('error');
             isValid = false;
         } else {
             fields[i].classList.remove('error');
         }
-    }
+  }
 
-    console.log(jsonData);
 
     if (jsonData.password !== jsonData.passwordConfirm) {
         document.querySelector('.passwordError').classList.add('error');
@@ -38,65 +54,10 @@ function checkForm(e) {
         isValid = false;
     }
     
-//    var inputs = document.querySelectorAll('input');
-//    var regexValidations = {
-//        
-//                "fname" : {
-//                    "regex" : /^[A-Z][a-zA-Z]*$/,
-//                },
-//        
-//                "lname" : {
-//                    "regex" : /^[A-Z][a-zA-Z]*$/,
-//                },
-//        
-//                "email" : {
-//                    "regex" : /^[a-zA-Z0-9$]+[@]{1}[a-zA-Z]+[\.]{1}[a-zA-Z]{2,3}$/,
-//                },        
-//    
-//                "phone" : {
-//                    "regex" : /^\(?([2-9]{1}[0-9]{2})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
-//                    
-//                },
-//                
-//                "address1" : {
-//                    "regex" : 
-//                },
-//        
-//                "address2" : {
-//                    "regex" :
-//                },
-//                
-//                "city" : {
-//                    "regex" :
-//                },
-//        
-//                "state" : {
-//                    "regex" :
-//                },
-//        
-//                "zipcode" : {
-//                    "regex" : /^\d{5}(?:[-\s]\d{4})?$/,
-//                },
-//        
-//                "username" : {
-//                    "regex" :
-//                },
-//        
-//                "password" : {
-//                    "regex" :
-//                },
-//        
-//                "passwordConfirm" : {
-//                    "regex" :
-//                }
-//        
-//                        
-//    };
 
-
-
-    if (isValid) {
+   if (isValid) {
         form.classList.add('hide');
+        console.log(jsonData);
         var conf = document.querySelector('#confirmation');
 
         var html = '<p> First Name: ' + jsonData.fname + '</p>';
@@ -117,6 +78,7 @@ function checkForm(e) {
 
 
 }
+
 
 function initialize() {
     geocoder = new google.maps.Geocoder();
