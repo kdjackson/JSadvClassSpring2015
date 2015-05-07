@@ -83,27 +83,48 @@ function checkForm(e) {
         console.log(savedData);
         console.log(JSON.parse(savedData));
             
-        document.querySelector('div').classList.remove('hide');
+        document.querySelector('#confirmation').classList.remove('hide');
             
             for (var key in jsonData) {
-                console.log(key + ": " + jsonData[key]);
-                document.querySelector('div').innerHTML += key + ": " + jsonData[key] + "</br>";                 
+                //console.log(key + ": " + jsonData[key]);
+                document.querySelector('#confirmation').innerHTML += key + ": " + jsonData[key] + "</br>";                 
             }
-
+                var btnRemove = document.querySelector('input[name="delete"]');        
+                btnRemove.addEventListener('click', removeData);
 
 }
 
-var btnRemove = document.querySelector('input[name="delete"]');        
-btnRemove.addEventListener('click', removeData);
+
 
 function removeData(e) {
        // e.preventDefault();
         
         localStorage.removeItem('jsonData');
-        cosole.log("remove");
+        
 
     
 }
+
+function dataLoad() {
+    
+    var data = localStorage.getItem('jsonData');
+    data = JSON.parse(data);
+    if ( data ) {
+        form.classList.add('hide');
+        document.querySelector('#confirmation').classList.remove('hide');
+        
+        for (var key in data) {
+                //console.log(key + ": " + jsonData[key]);
+                document.querySelector('#confirmation').innerHTML += key + ": " + data[key] + "</br>";                 
+            }
+            var btnRemove = document.querySelector('input[name="delete"]');        
+            btnRemove.addEventListener('click', removeData);
+        
+    } 
+    
+}
+
+window.addEventListener('load', dataLoad);
 
 
 function initialize() {
