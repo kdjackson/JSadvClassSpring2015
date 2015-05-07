@@ -58,25 +58,51 @@ function checkForm(e) {
    if (isValid) {
         form.classList.add('hide');
         console.log(jsonData);
-        var conf = document.querySelector('#confirmation');
-
-        var html = '<p> First Name: ' + jsonData.fname + '</p>';
-        html += '<p> Last Name: ' + jsonData.lname + '</p>';
-        html += '<p> Email: ' + jsonData.email + '</p>';
-        html += '<p> Phone: ' + jsonData.phone + '</p>';
-        html += '<p> Address 1: ' + jsonData.address1 + '</p>';
-        html += '<p> Address 2: ' + jsonData.address2 + '</p>';
-        html += '<p> City: ' + jsonData.city + '</p>';
-        html += '<p> State: ' + jsonData.state + '</p>';
-        html += '<p> Zipcode: ' + jsonData.zipcode + '</p>';
-        html += '<p> Username: ' + jsonData.username + '</p>';
-        html += '<p> Password: ' + jsonData.password + '</p>';
-        html += '<p> Password Confirmation: ' + jsonData.passwordConfirm + '</p>';
-
-        conf.innerHTML = html;
+//        var conf = document.querySelector('#confirmation');
+//
+//        var html = '<p> First Name: ' + jsonData.fname + '</p>';
+//        html += '<p> Last Name: ' + jsonData.lname + '</p>';
+//        html += '<p> Email: ' + jsonData.email + '</p>';
+//        html += '<p> Phone: ' + jsonData.phone + '</p>';
+//        html += '<p> Address 1: ' + jsonData.address1 + '</p>';
+//        html += '<p> Address 2: ' + jsonData.address2 + '</p>';
+//        html += '<p> City: ' + jsonData.city + '</p>';
+//        html += '<p> State: ' + jsonData.state + '</p>';
+//        html += '<p> Zipcode: ' + jsonData.zipcode + '</p>';
+//        html += '<p> Username: ' + jsonData.username + '</p>';
+//        html += '<p> Password: ' + jsonData.password + '</p>';
+//        html += '<p> Password Confirmation: ' + jsonData.passwordConfirm + '</p>';
+//
+//        conf.innerHTML = html;
     }
+    
+        localStorage.setItem('jsonData', JSON.stringify(jsonData) );
+        var savedData = localStorage.getItem('jsonData');
+        
+    
+        console.log(savedData);
+        console.log(JSON.parse(savedData));
+            
+        document.querySelector('div').classList.remove('hide');
+            
+            for (var key in jsonData) {
+                console.log(key + ": " + jsonData[key]);
+                document.querySelector('div').innerHTML += key + ": " + jsonData[key] + "</br>";                 
+            }
 
 
+}
+
+var btnRemove = document.querySelector('input[name="delete"]');        
+btnRemove.addEventListener('click', removeData);
+
+function removeData(e) {
+       // e.preventDefault();
+        
+        localStorage.removeItem('jsonData');
+        cosole.log("remove");
+
+    
 }
 
 
