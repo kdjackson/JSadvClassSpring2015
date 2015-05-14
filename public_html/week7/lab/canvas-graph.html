@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bar Graph</title>
+  <style>
+	canvas {
+		border: 1px solid black;
+	}
+  </style>
+</head>
+<body>
+
+    <div align="center">
+
+        <h2>Favorite Coffee Flavors</h2>
+
+        <canvas id="can" height="400" width="650"></canvas>
+        <br />
+        <button id="replay">Replay</button>
+
+    </div>
+
+	
+	
+	  <script type="text/javascript">
+			
+		//https://developer.apple.com/library/safari/documentation/AudioVideo/Conceptual/HTML-canvas-guide/DrawingLinesandShapes/DrawingLinesandShapes.html#//apple_ref/doc/uid/TP40010542-CH3-SW1
+		
+		var can = document.querySelector('canvas'),
+			ctx = can.getContext("2d");
+                
+                var replay = document.querySelector('#replay');
+
+            function draw() {
+                        //ctx.save();
+			ctx.shadowOffsetX = 2;
+			ctx.shadowColor = "black";
+			ctx.shadowOffsetY = 2;
+			ctx.shadowBlur=10;
+			
+			ctx.strokeStyle = "black";
+			ctx.lineJoin = "square";
+			ctx.lineCap = "square";
+			ctx.lineWidth = 1;
+			
+			// lines
+			ctx.beginPath();
+			ctx.moveTo(100, 0); //x, y
+			ctx.lineTo(100, can.height-40);						
+			ctx.lineTo(can.width, can.height-40);
+			
+			for ( var i = 40; i < 500; i += 40 ) {
+				ctx.moveTo(100, i); //x, y
+				ctx.lineTo(can.width, i);
+			
+			}
+			ctx.stroke();
+			//ctx.restore();
+					
+			
+			
+			ctx.fillStyle = "orange";
+			ctx.font = "16pt Helvetica";
+			ctx.fillText("FV", 150, can.height-10);
+			
+			//ctx.fillStyle = "orange";
+			//ctx.fillRect(150, 100, 50, can.height-140);  // x, y, width, height
+			
+			
+			ctx.fillStyle = "purple";
+			ctx.font = "16pt Helvetica";
+			ctx.fillText("HZL", 250, can.height-10);
+			
+			//ctx.fillStyle = "pink";
+			//ctx.fillRect(250, 250, 50, can.height-290);  // x, y, width, height
+			
+			ctx.fillStyle = "pink";
+			ctx.font = "16pt Helvetica";
+			ctx.fillText("BP", 350, can.height-10);
+			
+			//ctx.fillStyle = "pink";
+			//ctx.fillRect(350, 150, 50, can.height-190);  // x, y, width, height
+			                      
+                       
+                        var startYScore = 40;
+                       
+                       
+                       ctx.fillStyle = "black";
+                       ctx.font = "16pt Helvetica";
+                       
+                       for ( var score = 100 ; score >= 20; score -= 10) {
+                           
+                            ctx.fillText(score, 10, startYScore);
+                            startYScore += 40;
+                       }
+                        
+			
+			/*
+			ctx.fillStyle = "black";
+			ctx.font = "16pt Helvetica";
+			ctx.fillText("90", 10, 80);
+			
+			ctx.fillStyle = "black";
+			ctx.font = "16pt Helvetica";
+			ctx.fillText("80", 10, 120);
+			
+			ctx.fillStyle = "black";
+			ctx.font = "16pt Helvetica";
+			ctx.fillText("70", 10, 160);
+			
+			ctx.fillStyle = "black";
+			ctx.font = "16pt Helvetica";
+			ctx.fillText("60", 10, 200);
+			
+			ctx.fillStyle = "black";
+			ctx.font = "16pt Helvetica";
+			ctx.fillText("50", 10, 240);
+			
+			ctx.fillStyle = "black";
+			ctx.font = "16pt Helvetica";
+			ctx.fillText("40", 10, 280);
+			
+			ctx.fillStyle = "black";
+			ctx.font = "16pt Helvetica";
+			ctx.fillText("30", 10, 320);
+						
+			ctx.fillStyle = "black";
+			ctx.font = "16pt Helvetica";
+			ctx.fillText("20", 10, 360);
+			
+			
+			*/
+			
+            }
+		
+		function drawLines() {
+		
+			ctx.strokeStyle = "red";
+			ctx.lineJoin = "square";
+			ctx.lineCap = "round";
+			ctx.lineWidth = 5;
+			
+			ctx.beginPath();
+
+			ctx.moveTo(175, orangeend);
+
+			ctx.lineTo(275, purpleend);
+			ctx.lineTo(375, pinkend);
+			ctx.lineTo(475, can.height-40);
+			
+			ctx.stroke();
+		
+		}
+		
+		
+		var orangey = 300,
+                    orangeheight = can.height-340,
+                    orangeend = 10,
+                    purpley = 350,
+                    purpleheight = can.height-390,
+                    purpleend = 250,
+                    interval = setInterval(drawSteps, 100),
+                    pinky = 300,
+                    pinkheight = can.height-340,
+                    pinkend = 80;
+		
+		function drawSteps() {
+			
+			if (  orangey <= orangeend &&  purpley <= purpleend && pinky <= pinkend ) {
+				clearInterval(interval);
+				drawLines(); //callback, animations are done;
+			} else {
+				ctx.clearRect(0, 0, can.width, can.height);
+				draw();
+				
+				if ( orangey > orangeend ) {
+
+					ctx.fillStyle = "orange";
+					ctx.fillRect(150, orangey, 50, orangeheight);  // x, y, width, height
+					orangey -= 10;
+					orangeheight += 10;
+				} else {
+					ctx.fillStyle = "orange";
+					ctx.fillRect(150, orangey, 50, orangeheight);
+				}
+				
+				if ( purpley > purpleend ) {
+					ctx.fillStyle = "purple";
+					ctx.fillRect(250, purpley, 50, purpleheight);  // x, y, width, height
+					purpley -= 10;
+					purpleheight += 10;
+				} else {
+					ctx.fillStyle = "purple";
+					ctx.fillRect(250, purpley, 50, purpleheight); 
+				}
+                                
+                                if ( pinky > pinkend ) {
+                                        ctx.fillStyle = "pink";
+                                        ctx.fillRect(350, pinky, 50, pinkheight);  // x, y, width, height
+					pinky -= 10;
+					pinkheight += 10;
+                                } else {
+                                        ctx.fillStyle = "pink";
+					ctx.fillRect(350, pinky, 50, pinkheight); 
+                                }
+                                
+				
+			}
+			
+		}
+                
+                function redraw() {
+                    orangey = 300,
+                    orangeheight = can.height-340,
+                    orangeend = 10,
+                    purpley = 350,
+                    purpleheight = can.height-390,
+                    purpleend = 250,
+                    interval = setInterval(drawSteps, 100),
+                    pinky = 300,
+                    pinkheight = can.height-340,
+                    pinkend = 80;
+                }
+
+		replay.addEventListener('click', redraw);
+                
+		
+		
+
+    </script>
+</body>
+
+</html>
