@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lab 8</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <style type="text/css">
+            canvas {
+                border: 1px solid black;
+            }
+            .hide {
+                display:none;
+            }
+        </style>
+    </head>
+    <body>
+
+        <canvas id="race" width="750" height="150"></canvas>
+        <br />
+        <button class="hide" id="play">Play</button>
+
+        <script type="text/javascript">
+
+            var can = document.querySelector('#race');
+            var ctx = can.getContext('2d');
+
+            var play = document.querySelector('#play');
+            
+                    var bluewidth = 70,
+                    blueheight = 40,
+                    bluexaxis = 0,
+                    blueyaxis = 60;
+
+            var redwidth = 70,
+                    redheight = 40,
+                    redxaxis = 0,
+                    redyaxis = 10;
+
+            var canvasBottom = (can.height - redheight);
+            var canvasRight = (can.width - redwidth - 50);
+
+            var redWinner = false;
+            var blueWinner = false;
+
+            function randNum(max) {
+                return Math.ceil(Math.random() * max) + 1;
+            }
+
+            var max = 50;
+
+            function drawClear() {
+                ctx.clearRect(0, 0, can.width, can.height);
+            }
+
+            function drawLine() {
+                ctx.fillStyle = "#336699";
+                ctx.fillRect(700, 0, 2, 150); // x, y, width, height
+            }
+
+            function race() {
+                if (redWinner || blueWinner) {
+                    drawText();
+
+                } else {
+                    play.classList.add('hide');
+                    drawClear();
+                    drawLine();
+                    moveRedX();
+                    moveBlueX();
+                    setTimeout(race, 100);
+                }
+            }
+
+            function drawText() {
+                if (blueWinner) {
+                    ctx.fillStyle = "blue";
+                    ctx.font = "16pt Helvetica";
+                    ctx.fillText("Blue Wins!!", (can.width / 2) - 100, can.height / 2); //x,y
+                } else if (redWinner) {
+                    ctx.fillStyle = "red";
+                    ctx.font = "16pt Helvetica";
+                    ctx.fillText("Red Wins!!", (can.width / 2) - 100, can.height / 2); //x,y
+                }
+            }
+
+            function moveRedX() {
+                if (redxaxis < canvasRight) {
+                    redxaxis += randNum(max);
+                    ctx.fillStyle = "red";
+                    ctx.fillRect(redxaxis, redyaxis, redwidth, redheight); // x y / w h
+
+                } else {
+                    redWinner = true;
+                    play.classList.remove('hide');
+                }
+
+            }
+
+            function moveBlueX() {
+                if (bluexaxis < canvasRight) {
+                    bluexaxis += randNum(max);
+                    ctx.fillStyle = "blue";
+                    ctx.fillRect(bluexaxis, blueyaxis, bluewidth, blueheight); // x y / w h
+
+                } else {
+                    blueWinner = true;
+                    play.classList.remove('hide');
+                }
+
+            }
+            
+            function reset() {
+                    bluewidth = 70,
+                    blueheight = 40,
+                    bluexaxis = 0,
+                    blueyaxis = 60;
+
+                    redwidth = 70,
+                    redheight = 40,
+                    redxaxis = 0,
+                    redyaxis = 10;
+            
+                    blueWinner = false;
+                    redWinner = false;
+                    
+                    race();
+                
+            }
+            window.addEventListener('load', race);
+            play.addEventListener('click', reset);
+
+
+
+
+
+
+
+        </script>
+    </body>
+</html>
