@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+        
+        <button id="pop">Pop</button>
+        
+        <script type="text/javascript">
+            
+             var arr = [];
+             
+             var json = {};
+             json.fname = 'kimberly';
+             json.lname = 'jackson';
+             
+             arr.push(json); 
+             
+             //json.fname = 'gabe';
+             //json.lname = 'forti';  //can't do this see correction below
+                                      //the second string will override the first             
+             //arr.push(json);
+             
+             console.log(arr);
+             
+             //Correction, these are their own objects
+             var arr2 = [];
+             arr2.push({
+                 "fname" : 'gabe',
+                 "lname" : 'forti'
+             });
+             
+             arr2.push({
+                 "fname" : 'kim',
+                 "lname" : 'jackson'
+             });
+             
+             console.log(arr2[0].lname); //access the first lname "forti"
+             
+             //***************************************************************************//
+             
+             function addArr( fname, lname) {
+                 var jsonD = {};
+                 jsonD.fname = fname;
+                 jsonD.lname = lname;
+              
+                 arr2.push(jsonD);
+    
+             }
+             
+             addArr('Mickey', 'Mouse');
+             addArr('Donald', 'Duck');
+             addArr('Strawberry', 'Shortcake');
+             
+             console.log(arr2);
+             
+            function addArr2( fname, lname) {
+                 arr2.push({
+                 "fname" : fname,
+                 "lname" : lname
+             });
+    
+            }
+            
+             addArr2('Minnie', 'Mouse');
+             addArr2('Daisy', 'Duck');
+             addArr2('Strawberry', 'Shortcake');
+             
+             console.log(arr2);
+             
+             //******************************************************************************//
+             
+             //create a button that will remove the last item in the array
+             function remove() {
+                 arr2.pop();
+                 console.log(arr2);
+             }
+             
+             var del = document.querySelector('#pop'); 
+             del.addEventListener('click', remove);
+             
+            
+            
+             
+             
+             
+             
+        </script>
+    </body>
+</html>
